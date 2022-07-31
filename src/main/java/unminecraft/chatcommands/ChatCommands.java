@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import unminecraft.GenericCommand.Deepweb.DeepwebCommand;
+import unminecraft.GenericCommand.OCC.OutCharacterCommand;
 import unminecraft.GenericCommand.Twitter.TwitterCommand;
 
 public final class ChatCommands extends JavaPlugin {
@@ -35,5 +36,6 @@ public final class ChatCommands extends JavaPlugin {
     public void commandRegister(){
         this.getCommand("twt").setExecutor(new TwitterCommand(this));
         this.getCommand("deepweb").setExecutor(new DeepwebCommand(this));
+        this.getCommand("occ").setExecutor(new OutCharacterCommand(this));
     }
 }

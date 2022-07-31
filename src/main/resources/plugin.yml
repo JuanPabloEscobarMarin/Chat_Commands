@@ -11,3 +11,5 @@ commands:
     description: App de Twitter, habla y conoce gente globalmente, chat global del servidor dentro del rol para hablar de cualquier topico publicamente
   deepweb:
     description: Sistema de comunicacion ILEGAL, que permite el intercambio de armas o drogas
+  occ:
+    description: Permite enviar mensajes globales fuera del rol
