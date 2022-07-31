@@ -8,7 +8,16 @@ import org.bukkit.entity.Player;
 import unminecraft.GenericCommand.GenericCommand;
 import unminecraft.chatcommands.ChatCommands;
 
+import java.util.HashMap;
+
 public class DeepwebCommand extends GenericCommand {
+
+    private static HashMap<String, String> IpMap = new HashMap<String, String>();
+
+    public static void ClearHashMap() {
+        IpMap.clear();
+    }
+
     public DeepwebCommand(ChatCommands plugin){
         super(plugin);
         super.channelName = ChatColor.BLACK + "(" + ChatColor.DARK_GREEN + "Deepweb" + ChatColor.BLACK + ") ";
@@ -26,19 +35,22 @@ public class DeepwebCommand extends GenericCommand {
 
             if (i < 3) ip.append(".");
         }
-
-        ip.append(": ");
         return ip.toString();
-    }
-
-    private boolean isValidPlayer(Player player) {
-        String NAME_PERMISSION_ROLE = "Criminal";
-        return (player.hasPermission(NAME_PERMISSION_ROLE));
     }
 
     @Override
     protected void renderMessage(String username, String message){
-        String userIp = ChatColor.GREEN + randomIpGenerator();
+        String ip = "";
+
+        if (IpMap.get(username) == null){
+            ip = randomIpGenerator();
+            IpMap.put(username, ip);
+        } else {
+            ip = IpMap.get(username);
+        }
+
+
+        String userIp = ChatColor.GREEN + ip + ": ";
         Bukkit.broadcastMessage(channelName + userIp + ChatColor.GRAY + message);
     }
 
@@ -51,14 +63,9 @@ public class DeepwebCommand extends GenericCommand {
 
         Player player = (Player) sender;
 
-        if (!isValidPlayer(player)){
-            player.sendMessage("Aun no estas preparado para acceder al bajo mundo, te falta calle");
-            return false;
-        }
-
         if (args.length > 0) {
             String message = String.join(" ", args);
-            renderMessage("", message);
+            renderMessage(player.getName(), message);
         }
         else {
             String errorMessage = channelName + ChatColor.DARK_GREEN + "UNKNOWN_ERROR: " + ChatColor.GRAY + "Debes incluir un mensaje";

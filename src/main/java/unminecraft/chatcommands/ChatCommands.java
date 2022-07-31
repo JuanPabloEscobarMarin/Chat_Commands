@@ -16,11 +16,18 @@ public final class ChatCommands extends JavaPlugin {
     public void onEnable() {
         String initPluginMessage = name + ChatColor.WHITE + " has been enabled in the version: " + version;
         Bukkit.getConsoleSender().sendMessage(initPluginMessage);
+
+        // Reset hashmap - user ip
+        DeepwebCommand.ClearHashMap();
+
         commandRegister();
     }
 
     @Override
     public void onDisable() {
+        // Reset hashmap - user ip
+        DeepwebCommand.ClearHashMap();
+
         String endPluginMessage = name + ChatColor.RED + " has been disabled";
         Bukkit.getConsoleSender().sendMessage(endPluginMessage);
     }
