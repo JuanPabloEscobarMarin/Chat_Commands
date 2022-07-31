@@ -1,0 +1,13 @@
+name: ChatCommands
+version: '${project.version}'
+main: unminecraft.chatcommands.ChatCommands
+api-version: 1.18
+authors: [ ColchasGOD ]
+description: Set de novedades desarrolladas para el servidor de Minecraft UN
+website: https://github.com/UN-Minecraft
+
+commands:
+  twt:
+    description: App de Twitter, habla y conoce gente globalmente, chat global del servidor dentro del rol para hablar de cualquier topico publicamente
+  deepweb:
+    description: Sistema de comunicacion ILEGAL, que permite el intercambio de armas o drogas
