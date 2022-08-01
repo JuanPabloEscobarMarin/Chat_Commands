@@ -3,7 +3,9 @@ package unminecraft.chatcommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import unminecraft.ChatEvents.ChatController;
 import unminecraft.GenericCommand.DeepwebCommand;
 import unminecraft.GenericCommand.OutCharacterCommand;
 import unminecraft.GenericCommand.TwitterCommand;
@@ -22,6 +24,7 @@ public final class ChatCommands extends JavaPlugin {
         DeepwebCommand.ClearHashMap();
 
         commandRegister();
+        eventsRegister();
     }
 
     @Override
@@ -37,5 +40,10 @@ public final class ChatCommands extends JavaPlugin {
         this.getCommand("twt").setExecutor(new TwitterCommand(this));
         this.getCommand("deepweb").setExecutor(new DeepwebCommand(this));
         this.getCommand("occ").setExecutor(new OutCharacterCommand(this));
+    }
+
+    public void eventsRegister(){
+        PluginManager pluginManager = getServer().getPluginManager();
+        pluginManager.registerEvents(new ChatController(this), this);
     }
 }
