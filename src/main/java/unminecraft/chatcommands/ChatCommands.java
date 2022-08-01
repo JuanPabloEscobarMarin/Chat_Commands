@@ -4,9 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import unminecraft.GenericCommand.Deepweb.DeepwebCommand;
-import unminecraft.GenericCommand.OCC.OutCharacterCommand;
-import unminecraft.GenericCommand.Twitter.TwitterCommand;
+import unminecraft.GenericCommand.DeepwebCommand;
+import unminecraft.GenericCommand.OutCharacterCommand;
+import unminecraft.GenericCommand.TwitterCommand;
 
 public final class ChatCommands extends JavaPlugin {
     PluginDescriptionFile pdfile = getDescription();
