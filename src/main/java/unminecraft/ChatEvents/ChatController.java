@@ -9,26 +9,30 @@ import unminecraft.chatcommands.ChatCommands;
 
 public class ChatController implements Listener {
     private final ChatCommands plugin;
+    private final Boolean generalChatEnable;
 
     public ChatController(ChatCommands plugin) {
         this.plugin = plugin;
+        this.generalChatEnable = true;
     }
 
     @EventHandler
     public void modifyGeneralChat(AsyncPlayerChatEvent event){
-        Player player = event.getPlayer();
-        String message = event.getMessage();
+        if (!generalChatEnable){
+            Player player = event.getPlayer();
+            String message = event.getMessage();
 
-        // Si no se trata de un comando, el mensaje debera ser enviado como un tweet (para mantener el rol)
-        if (message.charAt(0) != '/'){
-            event.setCancelled(true);
+            // Si no se trata de un comando, el mensaje debera ser enviado como un tweet (para mantener el rol)
+            if (message.charAt(0) != '/'){
+                event.setCancelled(true);
 
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    twitterCommandTrigger(player, message);
-                }
-            }.runTask(plugin);
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        twitterCommandTrigger(player, message);
+                    }
+                }.runTask(plugin);
+            }
         }
     }
 
