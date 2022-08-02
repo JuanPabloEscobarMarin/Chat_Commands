@@ -19,7 +19,7 @@ public class DeepwebCommand extends GenericCommand {
 
     public DeepwebCommand(ChatCommands plugin){
         super(plugin);
-        super.channelName = ChatColor.BLACK + "(" + ChatColor.DARK_GREEN + "Deepweb" + ChatColor.BLACK + ") ";
+        super.channelName = ChatColor.BLACK + "(" + ChatColor.DARK_GREEN + "Deepweb" + ChatColor.BLACK + ")";
     }
 
     private String randomIpGenerator(){
