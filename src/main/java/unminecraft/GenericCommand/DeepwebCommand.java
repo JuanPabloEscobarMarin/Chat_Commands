@@ -19,7 +19,7 @@ public class DeepwebCommand extends GenericCommand {
 
     public DeepwebCommand(ChatCommands plugin){
         super(plugin);
-        super.channelName = ChatColor.BLACK + "(" + ChatColor.DARK_GREEN + "Deepweb" + ChatColor.BLACK + ")";
+        super.channelName = ChatColor.translateAlternateColorCodes('&', "&l&7[&4DeepWeb&l&7]");
     }
 
     private String randomIpGenerator(){
@@ -49,7 +49,8 @@ public class DeepwebCommand extends GenericCommand {
         }
 
 
-        String userIp = ChatColor.GREEN + ip + ": ";
+        String userIp = ChatColor.translateAlternateColorCodes('&', "&r&4%ipUser%: ");
+        userIp = userIp.replaceAll("%ipUser%",ChatColor.translateAlternateColorCodes('&', ip));
         Bukkit.broadcastMessage(channelName + userIp + ChatColor.GRAY + message);
     }
 
@@ -67,7 +68,7 @@ public class DeepwebCommand extends GenericCommand {
             renderMessage(player.getName(), message);
         }
         else {
-            String errorMessage = channelName + ChatColor.DARK_GREEN + "UNKNOWN_ERROR: " + ChatColor.GRAY + "Debes incluir un mensaje";
+            String errorMessage = channelName + ChatColor.DARK_GRAY + "UNKNOWN_ERROR: " + ChatColor.GRAY + "Debes incluir un mensaje";
             player.sendMessage(errorMessage);
         }
 
