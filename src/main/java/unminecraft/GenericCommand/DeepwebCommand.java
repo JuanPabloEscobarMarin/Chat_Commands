@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class DeepwebCommand extends GenericCommand {
 
-    private static HashMap<String, String> IpMap = new HashMap<String, String>();
+    private static final HashMap<String, String> IpMap = new HashMap<String, String>();
 
     public static void ClearHashMap() {
         IpMap.clear();

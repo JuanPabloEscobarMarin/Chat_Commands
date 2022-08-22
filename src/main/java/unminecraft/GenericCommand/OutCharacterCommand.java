@@ -11,12 +11,12 @@ public class OutCharacterCommand extends GenericCommand {
 
     public OutCharacterCommand(ChatCommands plugin) {
         super(plugin);
-        super.channelName = ChatColor.DARK_GRAY + "(OCC)";
+        super.channelName = ChatColor.GOLD + "/OCC ";
     }
 
     @Override
     protected void renderMessage(String username, String message){
-        Bukkit.broadcastMessage(channelName + username + ": " + ChatColor.GRAY + message);
+        Bukkit.broadcastMessage(channelName + username + ": " + ChatColor.WHITE + message);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class OutCharacterCommand extends GenericCommand {
             String message = String.join(" ", args);
             renderMessage(player.getName(), message);
         } else {
-            String errorMessage = channelName + ChatColor.GRAY + "OCC_ERROR: " + ChatColor.LIGHT_PURPLE + "Debes incluir un mensaje";
+            String errorMessage = channelName + ChatColor.GOLD + "OCC_ERROR: " + ChatColor.LIGHT_PURPLE + "Debes incluir un mensaje";
             player.sendMessage(errorMessage);
         }
 
