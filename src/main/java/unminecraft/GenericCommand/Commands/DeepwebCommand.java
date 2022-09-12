@@ -64,7 +64,7 @@ public class DeepwebCommand extends GenericCommand {
             renderMessage(newUsername, message);
         }
         else {
-            super.messageError();
+            super.messageError(player);
         }
 
         return true;

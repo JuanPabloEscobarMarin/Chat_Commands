@@ -38,23 +38,9 @@ public class GenericCommand implements CommandExecutor {
         Bukkit.getConsoleSender().sendMessage(this.plugin.name + errorMessage);
     }
 
-    protected void messageError(){
-        String stringTemplate = this.config.getString(this.generalPath + ".errorMessage");
-
-        if (stringTemplate == null) return;
-
-        String message = stringTemplate.replaceAll("%channel_name%", this.channelName);
-        Bukkit.getConsoleSender().sendMessage(message);
-    }
-
-    protected void renderMessage(String username, String message){
-        String stringTemplate = config.getString(this.generalPath + ".messageTemplate");
-
-        if (stringTemplate == null) return;
-
-
+    protected String replaceBaseString(String base, String username, String message){
         // Channel Name replace
-        String renderMessage = stringTemplate.replaceAll("%channel_name%", this.channelName);
+        String renderMessage = base.replaceAll("%channel_name%", this.channelName);
 
         // Username replace
         renderMessage = renderMessage.replaceAll("%player_username%", username);
@@ -64,6 +50,24 @@ public class GenericCommand implements CommandExecutor {
 
         renderMessage = ChatColor.translateAlternateColorCodes('&', renderMessage);
 
+        return renderMessage;
+    }
+
+    protected void messageError(Player player){
+        String stringTemplate = this.config.getString(this.generalPath + ".errorMessage");
+
+        if (stringTemplate == null) return;
+
+        String message = this.replaceBaseString(stringTemplate, "", "");
+        player.sendMessage(message);
+    }
+
+    protected void renderMessage(String username, String message){
+        String stringTemplate = config.getString(this.generalPath + ".messageTemplate");
+
+        if (stringTemplate == null) return;
+
+        String renderMessage = this.replaceBaseString(stringTemplate, username, message);
         Bukkit.broadcastMessage(renderMessage);
     }
 

@@ -25,7 +25,7 @@ public class OutCharacterCommand extends GenericCommand {
             String message = String.join(" ", args);
             renderMessage(player.getName(), message);
         } else {
-            super.messageError();
+            super.messageError(player);
         }
 
         return true;

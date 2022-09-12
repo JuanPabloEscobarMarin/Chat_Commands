@@ -25,7 +25,7 @@ public class TwitterCommand extends GenericCommand {
             renderMessage(player.getName(), message);
         }
         else {
-            super.messageError();
+            super.messageError(player);
         }
 
         return true;
