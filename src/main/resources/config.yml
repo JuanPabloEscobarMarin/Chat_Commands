@@ -1,6 +1,17 @@
 Config:
   Plugin:
-  General:
+    # true: El chat general es reemplazado por tweets
+    # false: El chat general se mantiene, los tweet se comportan como un complemento adicional
+    disableGeneralChat: false
   Twitter:
+    channelName: "&f(&9Twitter&f)"
+    messageTemplate: "&9@%player_username%: &f%message%"
+    errorMessage: "%channel_name%&9TWITTER_ERROR: &fDebes incluir un mensaje"
   DeepWeb:
+    channelName: "&l&7[&4DeepWeb&l&7]"
+    messageTemplate: "%channel_name%&4%ipUser%: &7%message%"
+    errorMessage: "%channel_name%&8UNKNOWN_ERROR: &dDebes incluir un mensaje"
   OCC:
+    channelName: "&8(OCC)"
+    messageTemplate: "%channel_name%%player_username%: &7%message%"
+    errorMessage: "%channel_name%&7OCC_ERROR: &dDebes incluir un mensaje"
