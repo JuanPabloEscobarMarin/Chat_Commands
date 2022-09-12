@@ -1,8 +1,8 @@
 Config:
   Plugin:
-    # true: El chat general es reemplazado por tweets
-    # false: El chat general se mantiene, los tweet se comportan como un complemento adicional
-    disableGeneralChat: false
+    # true: El chat general se mantiene, los tweet se comportan como un complemento adicional
+    # false: El chat general es reemplazado por tweets
+    generalChatEnable: true
   Twitter:
     channelName: "&f(&9Twitter&f)"
     messageTemplate: "&9@%player_username%: &f%message%"

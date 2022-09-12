@@ -1,5 +1,6 @@
 package unminecraft.ChatEvents;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,11 +10,26 @@ import unminecraft.chatcommands.ChatCommands;
 
 public class ChatController implements Listener {
     private final ChatCommands plugin;
-    private final Boolean generalChatEnable;
+    private Boolean generalChatEnable;
 
     public ChatController(ChatCommands plugin) {
         this.plugin = plugin;
+
+        FileConfiguration config = plugin.getConfig();
+
+        String path = "Config.Plugin.generalChatEnable";
+        String isEnable = config.getString(path);
+
         this.generalChatEnable = true;
+
+        if (isEnable == null){
+            return;
+        }
+
+        if (isEnable.equalsIgnoreCase("false")){
+            this.generalChatEnable = false;
+        }
+
     }
 
     @EventHandler
