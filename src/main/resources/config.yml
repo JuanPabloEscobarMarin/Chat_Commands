@@ -9,7 +9,7 @@ Config:
     errorMessage: "%channel_name%&9TWITTER_ERROR: &fDebes incluir un mensaje"
   DeepWeb:
     channelName: "&l&7[&4DeepWeb&l&7]"
-    messageTemplate: "%channel_name%&4%ipUser%: &7%message%"
+    messageTemplate: "%channel_name%&4%player_username%: &7%message%"
     errorMessage: "%channel_name%&8UNKNOWN_ERROR: &dDebes incluir un mensaje"
   OCC:
     channelName: "&8(OCC)"

@@ -1,7 +1,5 @@
 package unminecraft.GenericCommand.Commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,6 +9,7 @@ import unminecraft.chatcommands.ChatCommands;
 import java.util.HashMap;
 
 public class DeepwebCommand extends GenericCommand {
+    private static final String namePath = "DeepWeb";
 
     private static HashMap<String, String> IpMap = new HashMap<String, String>();
 
@@ -19,8 +18,7 @@ public class DeepwebCommand extends GenericCommand {
     }
 
     public DeepwebCommand(ChatCommands plugin){
-        super(plugin);
-        super.channelName = ChatColor.translateAlternateColorCodes('&', "&l&7[&4DeepWeb&l&7]");
+        super(plugin, namePath);
     }
 
     private String randomIpGenerator(){
@@ -38,8 +36,7 @@ public class DeepwebCommand extends GenericCommand {
         return ip.toString();
     }
 
-    @Override
-    protected void renderMessage(String username, String message){
+    protected String getUsernameIp(String username){
         String ip = "";
 
         if (IpMap.get(username) == null){
@@ -49,10 +46,7 @@ public class DeepwebCommand extends GenericCommand {
             ip = IpMap.get(username);
         }
 
-
-        String userIp = ChatColor.translateAlternateColorCodes('&', "&r&4%ipUser%: ");
-        userIp = userIp.replaceAll("%ipUser%",ChatColor.translateAlternateColorCodes('&', ip));
-        Bukkit.broadcastMessage(channelName + userIp + ChatColor.GRAY + message);
+        return ip;
     }
 
     @Override
@@ -66,11 +60,11 @@ public class DeepwebCommand extends GenericCommand {
 
         if (args.length > 0) {
             String message = String.join(" ", args);
-            renderMessage(player.getName(), message);
+            String newUsername = this.getUsernameIp(player.getName());
+            renderMessage(newUsername, message);
         }
         else {
-            String errorMessage = channelName + ChatColor.DARK_GRAY + "UNKNOWN_ERROR: " + ChatColor.GRAY + "Debes incluir un mensaje";
-            player.sendMessage(errorMessage);
+            super.messageError();
         }
 
         return true;

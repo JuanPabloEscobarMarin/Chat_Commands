@@ -1,7 +1,5 @@
 package unminecraft.GenericCommand.Commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -9,15 +7,9 @@ import unminecraft.GenericCommand.GenericCommand;
 import unminecraft.chatcommands.ChatCommands;
 
 public class TwitterCommand extends GenericCommand {
+    private static final String namePath = "Twitter";
     public TwitterCommand(ChatCommands plugin){
-        super(plugin);
-        super.channelName = ChatColor.WHITE + "(" + ChatColor.BLUE + "Twitter" + ChatColor.WHITE + ")";
-    }
-
-    @Override
-    protected void renderMessage(String username, String message){
-        String twitterUser = ChatColor.BLUE + "@" + username + ": ";
-        Bukkit.broadcastMessage(channelName + twitterUser + ChatColor.WHITE + message);
+        super(plugin, namePath);
     }
 
     @Override
@@ -33,8 +25,7 @@ public class TwitterCommand extends GenericCommand {
             renderMessage(player.getName(), message);
         }
         else {
-            String errorMessage = channelName + ChatColor.BLUE + "TWITTER_ERROR: " + ChatColor.WHITE + "Debes incluir un mensaje";
-            player.sendMessage(errorMessage);
+            super.messageError();
         }
 
         return true;
