@@ -1,10 +1,11 @@
-package unminecraft.GenericCommand;
+package unminecraft.GenericCommand.Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import unminecraft.GenericCommand.GenericCommand;
 import unminecraft.chatcommands.ChatCommands;
 
 public class TwitterCommand extends GenericCommand {
