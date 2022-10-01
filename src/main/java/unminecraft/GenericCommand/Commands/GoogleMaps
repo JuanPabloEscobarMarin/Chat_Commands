@@ -1,0 +1,80 @@
+package unminecraft.GenericCommand.Commands;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import unminecraft.GenericCommand.GenericCommand;
+import unminecraft.chatcommands.ChatCommands;
+import org.bukkit.Location;
+public class GoogleMapsCommand extends GenericCommand {
+    private static final String namePath = "Google Maps";
+    public GoogleMapsCommand(ChatCommands plugin){
+        super(plugin, namePath);
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        if (!isPlayerInstance(sender)){
+            consoleCommandError();
+            return false;
+        }
+        
+    final Player player = (Player)sender;
+            final Location loc = player.getLocation();
+            final int x = loc.getBlockX();
+            final int y = loc.getBlockY();
+            final int z = loc.getBlockZ();
+            this.world = player.getLocation().getWorld().getName();
+            this.world_id = this.stringToWorldID(this.world);
+            if (this.useDatabase()) {
+                try {
+                    final Connection con = this.connection();
+                    con.setAutoCommit(false);
+                    final PreparedStatement statement = con.prepareStatement("INSERT INTO " + this.getTable() + " VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    statement.setInt(1, 0);
+                    statement.setInt(2, this.usernameToUserID(player.getPlayerListName()));
+                    statement.setString(3, args[1]);
+                    statement.setInt(4, x);
+                    statement.setInt(5, y);
+                    statement.setInt(6, z);
+                    statement.setInt(7, this.world_id);
+                    statement.executeUpdate();
+                    con.commit();
+                    statement.close();
+                    con.close();
+                }
+                catch (SQLException e) {
+                    if (this.debug()) {
+                        this.getLogger().severe("\u001b[1;31m[Debug] Error occured:\u001b[0m " + e);
+                    }
+                }
+            }
+            else {
+                this.loadCounter();
+                try {
+                    final File location = new File(this.getDataFolder() + File.separator + "data" + File.separator + this.getFolderName() + File.separator + this.counter.get(this.getFolderName()));
+                    location.createNewFile();
+                    final FileConfiguration locconfig = (FileConfiguration)new YamlConfiguration();
+                    try {
+                        locconfig.load(location);
+                    }
+                    catch (Exception e2) {
+                        if (this.debug()) {
+                            this.getLogger().severe("\u001b[1;31m[Debug] Error occured:\u001b[0m " + e2);
+                        }
+                    }
+                    locconfig.set("user", (Object)this.usernameToUserID(player.getPlayerListName()));
+                    locconfig.set("name", (Object)args[1]);
+                    locconfig.set("x", (Object)x);
+                    locconfig.set("y", (Object)y);
+                    locconfig.set("z", (Object)z);
+                    locconfig.set("world", (Object)this.world_id);
+                    locconfig.save(location);
+                }
+                catch (Exception e3) {
+                    if (this.debug()) {
+                        this.getLogger().severe("\u001b[1;31m[Debug] Error occured:\u001b[0m " + e3);
+                    }
+                }
+                this.updateCounter(1);
+            }
